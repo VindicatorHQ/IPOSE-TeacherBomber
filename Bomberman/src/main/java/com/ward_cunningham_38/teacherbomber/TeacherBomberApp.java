@@ -44,9 +44,6 @@ import javafx.scene.input.KeyCode;
 import static com.almasb.fxgl.dsl.FXGL.*;
 import static com.ward_cunningham_38.teacherbomber.TeacherBomberType.*;
 
-/**
- * @author Almas Baimagambetov (AlmasB) (almaslvl@gmail.com)
- */
 public class TeacherBomberApp extends GameApplication {
 
     public static final int TILE_SIZE = 40;
@@ -139,13 +136,15 @@ public class TeacherBomberApp extends GameApplication {
         });
     }
 
-    public void onBrickDestroyed(Entity brick) {
-        int cellX = (int)((brick.getX() + 20) / TILE_SIZE);
-        int cellY = (int)((brick.getY() + 20) / TILE_SIZE);
+    public void onBombBlowUp(Entity entity)
+    {
+        int cellX = (int)((entity.getX() + 20) / TILE_SIZE);
+        int cellY = (int)((entity.getY() + 20) / TILE_SIZE);
 
         grid.get(cellX, cellY).setState(CellState.WALKABLE);
 
-        if (FXGLMath.randomBoolean()) {
+        if (FXGLMath.randomBoolean())
+        {
             spawn("Powerup", cellX * 40, cellY * 40);
         }
     }

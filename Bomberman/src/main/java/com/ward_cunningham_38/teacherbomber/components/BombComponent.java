@@ -8,9 +8,6 @@ import com.ward_cunningham_38.teacherbomber.TeacherBomberType;
 
 import static com.almasb.fxgl.dsl.FXGL.*;
 
-/**
- * @author Almas Baimagambetov (almaslvl@gmail.com)
- */
 public class BombComponent extends Component {
 
     private int radius;
@@ -27,8 +24,17 @@ public class BombComponent extends Component {
                 .stream()
                 .filter(e -> e.isType(TeacherBomberType.BRICK))
                 .forEach(e -> {
-                    FXGL.<TeacherBomberApp>getAppCast().onBrickDestroyed(e);
+                    FXGL.<TeacherBomberApp>getAppCast().onBombBlowUp(e);
                     e.removeFromWorld();
+                });
+
+        getGameWorld()
+                .getEntitiesInRange(bbox.range(radius, radius))
+                .stream()
+                .filter(p -> p.isType(TeacherBomberType.PLAYER))
+                .forEach(p -> {
+                    FXGL.<TeacherBomberApp>getAppCast().onBombBlowUp(p);
+                    p.removeFromWorld();
                 });
 
         entity.removeFromWorld();

@@ -40,6 +40,13 @@ import com.almasb.fxgl.pathfinding.CellState;
 import com.almasb.fxgl.pathfinding.astar.AStarGrid;
 import com.ward_cunningham_38.teacherbomber.components.PlayerComponent;
 import javafx.scene.input.KeyCode;
+import javafx.scene.layout.Pane;
+import javafx.scene.control.Button;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.*;
+
+
+import java.awt.*;
 
 import static com.almasb.fxgl.dsl.FXGL.*;
 import static com.ward_cunningham_38.teacherbomber.TeacherBomberType.*;
@@ -65,9 +72,11 @@ public class TeacherBomberApp extends GameApplication {
     @Override
     protected void initSettings(GameSettings settings) {
         settings.setTitle("Bomberman App");
-        settings.setVersion("0.1");
+        settings.setVersion(" ");
         settings.setWidth(600);
         settings.setHeight(600);
+        settings.setMainMenuEnabled(true);
+
         settings.setSceneFactory(new SceneFactory() {
             @Override
             public FXGLMenu newGameMenu() {
@@ -151,6 +160,7 @@ public class TeacherBomberApp extends GameApplication {
 
     @Override
     protected void initGame() {
+
         getGameWorld().addEntityFactory(new TeacherBomberFactory());
 
         Level level = getAssetLoader().loadLevel("0.txt", new TextLevelLoader(40, 40, '0'));

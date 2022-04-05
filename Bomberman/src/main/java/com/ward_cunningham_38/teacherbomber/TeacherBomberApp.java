@@ -50,8 +50,10 @@ public class TeacherBomberApp extends GameApplication {
 
     private AStarGrid grid;
 
-    private Entity player;
-    private PlayerComponent playerComponent;
+    private Entity player1;
+    private Entity player2;
+    private PlayerComponent playerComponent1;
+    private PlayerComponent playerComponent2;
 
     public AStarGrid getGrid() {
         return grid;
@@ -73,40 +75,75 @@ public class TeacherBomberApp extends GameApplication {
 
     @Override
     protected void initInput() {
-        getInput().addAction(new UserAction("Move Up") {
+        getInput().addAction(new UserAction("Move Up W") {
             @Override
             protected void onActionBegin() {
-                playerComponent.moveUp();
+                playerComponent1.moveUp();
             }
         }, KeyCode.W);
 
-        getInput().addAction(new UserAction("Move Left") {
+        getInput().addAction(new UserAction("Move Left A") {
             @Override
             protected void onActionBegin() {
-                playerComponent.moveLeft();
+                playerComponent1.moveLeft();
             }
         }, KeyCode.A);
 
-        getInput().addAction(new UserAction("Move Down") {
+        getInput().addAction(new UserAction("Move Down S") {
             @Override
             protected void onActionBegin() {
-                playerComponent.moveDown();
+                playerComponent1.moveDown();
             }
         }, KeyCode.S);
 
-        getInput().addAction(new UserAction("Move Right") {
+        getInput().addAction(new UserAction("Move Right D") {
             @Override
             protected void onActionBegin() {
-                playerComponent.moveRight();
+                playerComponent1.moveRight();
             }
         }, KeyCode.D);
 
-        getInput().addAction(new UserAction("Place Bomb") {
+        getInput().addAction(new UserAction("Place Bomb F") {
             @Override
             protected void onActionBegin() {
-                playerComponent.placeBomb();
+                playerComponent1.placeBomb();
             }
         }, KeyCode.F);
+
+        getInput().addAction(new UserAction("Move Up Arrow") {
+            @Override
+            protected void onActionBegin() {
+                playerComponent2.moveUp();
+            }
+        }, KeyCode.UP);
+
+        getInput().addAction(new UserAction("Move Left Arrow") {
+            @Override
+            protected void onActionBegin() {
+                playerComponent2.moveLeft();
+            }
+        }, KeyCode.LEFT);
+
+        getInput().addAction(new UserAction("Move Down Arrow") {
+            @Override
+            protected void onActionBegin() {
+                playerComponent2.moveDown();
+            }
+        }, KeyCode.DOWN);
+
+        getInput().addAction(new UserAction("Move Right Arrow") {
+            @Override
+            protected void onActionBegin() {
+                playerComponent2.moveRight();
+            }
+        }, KeyCode.RIGHT);
+
+        getInput().addAction(new UserAction("Place Bomb ") {
+            @Override
+            protected void onActionBegin() {
+                playerComponent2.placeBomb();
+            }
+        }, KeyCode.NUMPAD0);
     }
 
     @Override
@@ -125,14 +162,17 @@ public class TeacherBomberApp extends GameApplication {
             return CellState.WALKABLE;
         });
 
-        player = spawn("Player");
-        playerComponent = player.getComponent(PlayerComponent.class);
+        player1 = spawn("Player_1");
+        playerComponent1 = player1.getComponent(PlayerComponent.class);
+
+        player2 = spawn("Player_2");
+        playerComponent2 = player2.getComponent(PlayerComponent.class);
     }
 
     @Override
     protected void initPhysics() {
         onCollisionCollectible(PLAYER, POWERUP, powerup -> {
-            playerComponent.increaseMaxBombs();
+            playerComponent1.increaseMaxBombs();
         });
     }
 

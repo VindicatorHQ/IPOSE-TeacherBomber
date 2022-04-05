@@ -48,12 +48,25 @@ public class TeacherBomberFactory implements EntityFactory {
                 .build();
     }
 
-    @Spawns("Player")
-    public Entity newPlayer(SpawnData data) {
+    @Spawns("Player_1")
+    public Entity player_1(SpawnData data) {
         return entityBuilder(data)
                 .atAnchored(new Point2D(20, 20), new Point2D(20, 20))
                 .type(PLAYER)
                 .viewWithBBox(new Rectangle(TILE_SIZE, TILE_SIZE, Color.BLUE))
+                .with(new CollidableComponent(true))
+                .with(new CellMoveComponent(40, 40, 150))
+                .with(new AStarMoveComponent(FXGL.<TeacherBomberApp>getAppCast().getGrid()))
+                .with(new PlayerComponent())
+                .build();
+    }
+
+    @Spawns("Player_2")
+    public Entity player_2(SpawnData data) {
+        return entityBuilder(data)
+                .atAnchored(new Point2D(20, 20), new Point2D(580, 20))
+                .type(PLAYER)
+                .viewWithBBox(new Rectangle(TILE_SIZE, TILE_SIZE, Color.GREEN))
                 .with(new CollidableComponent(true))
                 .with(new CellMoveComponent(40, 40, 150))
                 .with(new AStarMoveComponent(FXGL.<TeacherBomberApp>getAppCast().getGrid()))

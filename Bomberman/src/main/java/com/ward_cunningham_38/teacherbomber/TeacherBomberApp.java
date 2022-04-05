@@ -138,7 +138,7 @@ public class TeacherBomberApp extends GameApplication {
             }
         }, KeyCode.RIGHT);
 
-        getInput().addAction(new UserAction("Place Bomb ") {
+        getInput().addAction(new UserAction("Place Bomb NUM0") {
             @Override
             protected void onActionBegin() {
                 playerComponent2.placeBomb();

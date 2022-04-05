@@ -1,8 +1,8 @@
-package com.almasb.fxglgames.bomberman;
+package com.ward_cunningham_38.teacherbomber;
 
 /**
  * @author Almas Baimagambetov (almaslvl@gmail.com)
  */
-public enum BombermanType {
+public enum TeacherBomberType {
     PLAYER, WALL, BRICK, BOMB, POWERUP
 }

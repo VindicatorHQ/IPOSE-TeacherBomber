@@ -1,10 +1,10 @@
-package com.almasb.fxglgames.bomberman.components;
+package com.ward_cunningham_38.teacherbomber.components;
 
 import com.almasb.fxgl.dsl.FXGL;
 import com.almasb.fxgl.entity.component.Component;
 import com.almasb.fxgl.entity.components.BoundingBoxComponent;
-import com.almasb.fxglgames.bomberman.BombermanApp;
-import com.almasb.fxglgames.bomberman.BombermanType;
+import com.ward_cunningham_38.teacherbomber.TeacherBomberApp;
+import com.ward_cunningham_38.teacherbomber.TeacherBomberType;
 
 import static com.almasb.fxgl.dsl.FXGL.*;
 
@@ -25,9 +25,9 @@ public class BombComponent extends Component {
         getGameWorld()
                 .getEntitiesInRange(bbox.range(radius, radius))
                 .stream()
-                .filter(e -> e.isType(BombermanType.BRICK))
+                .filter(e -> e.isType(TeacherBomberType.BRICK))
                 .forEach(e -> {
-                    FXGL.<BombermanApp>getAppCast().onBrickDestroyed(e);
+                    FXGL.<TeacherBomberApp>getAppCast().onBrickDestroyed(e);
                     e.removeFromWorld();
                 });
 

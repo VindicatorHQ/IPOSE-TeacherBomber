@@ -24,7 +24,7 @@
  * SOFTWARE.
  */
 
-package com.almasb.fxglgames.bomberman;
+package com.ward_cunningham_38.teacherbomber;
 
 import com.almasb.fxgl.app.GameApplication;
 import com.almasb.fxgl.app.GameSettings;
@@ -38,16 +38,16 @@ import com.almasb.fxgl.entity.level.text.TextLevelLoader;
 import com.almasb.fxgl.input.UserAction;
 import com.almasb.fxgl.pathfinding.CellState;
 import com.almasb.fxgl.pathfinding.astar.AStarGrid;
-import com.almasb.fxglgames.bomberman.components.PlayerComponent;
+import com.ward_cunningham_38.teacherbomber.components.PlayerComponent;
 import javafx.scene.input.KeyCode;
 
 import static com.almasb.fxgl.dsl.FXGL.*;
-import static com.almasb.fxglgames.bomberman.BombermanType.*;
+import static com.ward_cunningham_38.teacherbomber.TeacherBomberType.*;
 
 /**
  * @author Almas Baimagambetov (AlmasB) (almaslvl@gmail.com)
  */
-public class BombermanApp extends GameApplication {
+public class TeacherBomberApp extends GameApplication {
 
     public static final int TILE_SIZE = 40;
 
@@ -114,7 +114,7 @@ public class BombermanApp extends GameApplication {
 
     @Override
     protected void initGame() {
-        getGameWorld().addEntityFactory(new BombermanFactory());
+        getGameWorld().addEntityFactory(new TeacherBomberFactory());
 
         Level level = getAssetLoader().loadLevel("0.txt", new TextLevelLoader(40, 40, '0'));
         getGameWorld().setLevel(level);

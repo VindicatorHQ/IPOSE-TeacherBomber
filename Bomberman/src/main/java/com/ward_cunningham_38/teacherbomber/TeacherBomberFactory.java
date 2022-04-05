@@ -1,4 +1,4 @@
-package com.almasb.fxglgames.bomberman;
+package com.ward_cunningham_38.teacherbomber;
 
 import com.almasb.fxgl.dsl.FXGL;
 import com.almasb.fxgl.entity.Entity;
@@ -8,20 +8,20 @@ import com.almasb.fxgl.entity.Spawns;
 import com.almasb.fxgl.entity.components.CollidableComponent;
 import com.almasb.fxgl.pathfinding.CellMoveComponent;
 import com.almasb.fxgl.pathfinding.astar.AStarMoveComponent;
-import com.almasb.fxglgames.bomberman.components.BombComponent;
-import com.almasb.fxglgames.bomberman.components.PlayerComponent;
+import com.ward_cunningham_38.teacherbomber.components.BombComponent;
+import com.ward_cunningham_38.teacherbomber.components.PlayerComponent;
 import javafx.geometry.Point2D;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
 import static com.almasb.fxgl.dsl.FXGL.*;
-import static com.almasb.fxglgames.bomberman.BombermanApp.TILE_SIZE;
-import static com.almasb.fxglgames.bomberman.BombermanType.*;
+import static com.ward_cunningham_38.teacherbomber.TeacherBomberApp.TILE_SIZE;
+import static com.ward_cunningham_38.teacherbomber.TeacherBomberType.*;
 
 /**
  * @author Almas Baimagambetov (almaslvl@gmail.com)
  */
-public class BombermanFactory implements EntityFactory {
+public class TeacherBomberFactory implements EntityFactory {
 
     @Spawns("BG")
     public Entity newBackground(SpawnData data) {
@@ -56,7 +56,7 @@ public class BombermanFactory implements EntityFactory {
                 .viewWithBBox(new Rectangle(TILE_SIZE, TILE_SIZE, Color.BLUE))
                 .with(new CollidableComponent(true))
                 .with(new CellMoveComponent(40, 40, 150))
-                .with(new AStarMoveComponent(FXGL.<BombermanApp>getAppCast().getGrid()))
+                .with(new AStarMoveComponent(FXGL.<TeacherBomberApp>getAppCast().getGrid()))
                 .with(new PlayerComponent())
                 .build();
     }

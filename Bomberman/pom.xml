@@ -18,6 +18,8 @@
         <jfx.maven.plugin.version>0.0.6</jfx.maven.plugin.version>
         <fxgl.version>dev-SNAPSHOT</fxgl.version>
         <mainClassName>com.ward_cunningham_38.teacherbomber.BombermanApp</mainClassName>
+        <maven.compiler.source>16</maven.compiler.source>
+        <maven.compiler.target>16</maven.compiler.target>
     </properties>
 
     <dependencies>

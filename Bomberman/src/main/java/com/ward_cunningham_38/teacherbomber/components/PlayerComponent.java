@@ -11,9 +11,6 @@ import javafx.util.Duration;
 import static com.almasb.fxgl.dsl.FXGL.getGameTimer;
 import static com.almasb.fxgl.dsl.FXGL.spawn;
 
-/**
- * @author Almas Baimagambetov (almaslvl@gmail.com)
- */
 public class PlayerComponent extends Component {
 
     private CellMoveComponent cell;
@@ -33,7 +30,7 @@ public class PlayerComponent extends Component {
 
         bombsPlaced++;
 
-        Entity bomb = spawn("Bomb", new SpawnData(cell.getCellX() * 40, cell.getCellY() * 40).put("radius", TeacherBomberApp.TILE_SIZE / 2));
+        Entity bomb = spawn("Bomb", new SpawnData(cell.getCellX() * 120, cell.getCellY() * 120).put("radius", TeacherBomberApp.TILE_SIZE / 2));
 
         getGameTimer().runOnceAfter(() -> {
             bomb.getComponent(BombComponent.class).explode();

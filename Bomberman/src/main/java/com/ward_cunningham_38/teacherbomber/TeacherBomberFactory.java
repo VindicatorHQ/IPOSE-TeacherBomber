@@ -18,16 +18,13 @@ import static com.almasb.fxgl.dsl.FXGL.*;
 import static com.ward_cunningham_38.teacherbomber.TeacherBomberApp.TILE_SIZE;
 import static com.ward_cunningham_38.teacherbomber.TeacherBomberType.*;
 
-/**
- * @author Almas Baimagambetov (almaslvl@gmail.com)
- */
 public class TeacherBomberFactory implements EntityFactory {
 
     @Spawns("BG")
     public Entity newBackground(SpawnData data) {
         return entityBuilder()
                 .at(0, 0)
-                .view(new Rectangle(600, 600, Color.LIGHTGREEN))
+                .viewWithBBox(texture("Floor.png", 1920, 1080))
                 .zIndex(-1)
                 .build();
     }
@@ -36,7 +33,7 @@ public class TeacherBomberFactory implements EntityFactory {
     public Entity newWall(SpawnData data) {
         return entityBuilder(data)
                 .type(WALL)
-                .viewWithBBox(new Rectangle(40, 40, Color.GRAY.saturate()))
+                .viewWithBBox(texture("brick.png", 120, 120))
                 .build();
     }
 
@@ -44,18 +41,18 @@ public class TeacherBomberFactory implements EntityFactory {
     public Entity newBrick(SpawnData data) {
         return entityBuilder(data)
                 .type(BRICK)
-                .viewWithBBox(texture("brick.png", 40, 40))
+                .viewWithBBox(texture("wall.png", 120, 120))
                 .build();
     }
 
     @Spawns("Player")
     public Entity newPlayer(SpawnData data) {
         return entityBuilder(data)
-                .atAnchored(new Point2D(20, 20), new Point2D(20, 20))
+                .atAnchored(new Point2D(60, 60), new Point2D(128, 72))
                 .type(PLAYER)
-                .viewWithBBox(new Rectangle(TILE_SIZE, TILE_SIZE, Color.BLUE))
+                .viewWithBBox(texture("koen.png", 120, 120))
                 .with(new CollidableComponent(true))
-                .with(new CellMoveComponent(40, 40, 150))
+                .with(new CellMoveComponent(120, 120, 150))
                 .with(new AStarMoveComponent(FXGL.<TeacherBomberApp>getAppCast().getGrid()))
                 .with(new PlayerComponent())
                 .build();
@@ -65,7 +62,7 @@ public class TeacherBomberFactory implements EntityFactory {
     public Entity newBomb(SpawnData data) {
         return entityBuilder(data)
                 .type(BOMB)
-                .viewWithBBox("bomb.png")
+                .viewWithBBox(texture("bomb.png", 120, 120))
                 .with(new BombComponent(data.get("radius")))
                 .atAnchored(new Point2D(13, 11), new Point2D(data.getX() + TILE_SIZE / 2, data.getY() + TILE_SIZE / 2))
                 .build();
@@ -75,7 +72,7 @@ public class TeacherBomberFactory implements EntityFactory {
     public Entity newPowerup(SpawnData data) {
         return entityBuilder(data)
                 .type(POWERUP)
-                .viewWithBBox(new Rectangle(TILE_SIZE, TILE_SIZE, Color.YELLOW))
+                .viewWithBBox(texture("BLCK2.png", 120, 120))
                 .with(new CollidableComponent(true))
                 .build();
     }

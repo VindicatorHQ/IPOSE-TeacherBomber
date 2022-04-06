@@ -44,9 +44,6 @@ import javafx.scene.input.KeyCode;
 import static com.almasb.fxgl.dsl.FXGL.*;
 import static com.ward_cunningham_38.teacherbomber.TeacherBomberType.*;
 
-/**
- * @author Almas Baimagambetov (AlmasB) (almaslvl@gmail.com)
- */
 public class TeacherBomberApp extends GameApplication {
 
     public static final int TILE_SIZE = 40;
@@ -64,8 +61,10 @@ public class TeacherBomberApp extends GameApplication {
     protected void initSettings(GameSettings settings) {
         settings.setTitle("Bomberman App");
         settings.setVersion("0.1");
-        settings.setWidth(600);
-        settings.setHeight(600);
+        settings.setFullScreenAllowed(true);
+        settings.setFullScreenFromStart(true);
+        settings.setWidth(1920);
+        settings.setHeight(1080);
         settings.setSceneFactory(new SceneFactory() {
             @Override
             public FXGLMenu newGameMenu() {
@@ -116,12 +115,12 @@ public class TeacherBomberApp extends GameApplication {
     protected void initGame() {
         getGameWorld().addEntityFactory(new TeacherBomberFactory());
 
-        Level level = getAssetLoader().loadLevel("0.txt", new TextLevelLoader(40, 40, '0'));
+        Level level = getAssetLoader().loadLevel("0.txt", new TextLevelLoader(120, 120, '0'));
         getGameWorld().setLevel(level);
 
         spawn("BG");
 
-        grid = AStarGrid.fromWorld(getGameWorld(), 15, 15, 40, 40, type -> {
+        grid = AStarGrid.fromWorld(getGameWorld(), 45, 45, 120, 120, type -> {
             if (type.equals(WALL) || type.equals(BRICK))
                 return CellState.NOT_WALKABLE;
 

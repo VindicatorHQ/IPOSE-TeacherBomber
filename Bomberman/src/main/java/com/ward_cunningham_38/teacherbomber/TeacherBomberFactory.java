@@ -18,9 +18,6 @@ import static com.almasb.fxgl.dsl.FXGL.*;
 import static com.ward_cunningham_38.teacherbomber.TeacherBomberApp.TILE_SIZE;
 import static com.ward_cunningham_38.teacherbomber.TeacherBomberType.*;
 
-/**
- * @author Almas Baimagambetov (almaslvl@gmail.com)
- */
 public class TeacherBomberFactory implements EntityFactory {
 
     @Spawns("BG")

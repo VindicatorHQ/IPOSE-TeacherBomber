@@ -8,9 +8,6 @@ import com.ward_cunningham_38.teacherbomber.TeacherBomberType;
 
 import static com.almasb.fxgl.dsl.FXGL.*;
 
-/**
- * @author Almas Baimagambetov (almaslvl@gmail.com)
- */
 public class BombComponent extends Component {
 
     private int radius;

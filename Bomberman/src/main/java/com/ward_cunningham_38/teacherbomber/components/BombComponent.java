@@ -22,10 +22,9 @@ public class BombComponent extends Component {
         getGameWorld()
                 .getEntitiesInRange(bbox.range(radius, radius))
                 .stream()
-                .filter(e -> e.isType(TeacherBomberType.BRICK))
+                .filter(e -> e.isType(TeacherBomberType.BRICK) || e.isType(TeacherBomberType.PLAYER))
                 .forEach(e -> {
-                    FXGL.<TeacherBomberApp>getAppCast().onBrickDestroyed(e);
-                    e.removeFromWorld();
+                    FXGL.<TeacherBomberApp>getAppCast().onBombBlowUp(e);
                 });
 
         entity.removeFromWorld();

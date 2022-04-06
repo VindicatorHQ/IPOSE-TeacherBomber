@@ -9,7 +9,7 @@
 0w0w0w0w0w0w0w0
 0w0w0w0w0w0w0w0
 0w0w0w0w0w0w0w0
-0w0w0w0w0w0w0w0
+0w0w00ww000w0w0
 b0000000000000b
 0w0w0w0w0w0w0w0
-00bbbbbbbbbbb00
+000bbbbbbbbb000

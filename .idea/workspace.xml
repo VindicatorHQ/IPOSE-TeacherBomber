@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f63a70c7-64fe-47db-93a6-6e709d947414" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/Bomberman/src/main/resources/assets/levels/1.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Bomberman/src/main/resources/assets/levels/1.txt" afterDir="false" />
-    </list>
+    <list default="true" id="f63a70c7-64fe-47db-93a6-6e709d947414" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />

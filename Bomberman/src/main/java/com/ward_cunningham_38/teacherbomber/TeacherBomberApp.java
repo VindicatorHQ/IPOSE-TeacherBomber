@@ -32,6 +32,8 @@ import com.almasb.fxgl.app.scene.FXGLMenu;
 import com.almasb.fxgl.app.scene.SceneFactory;
 import com.almasb.fxgl.app.scene.SimpleGameMenu;
 import com.almasb.fxgl.core.math.FXGLMath;
+import com.almasb.fxgl.core.util.Platform;
+import com.almasb.fxgl.dsl.FXGL;
 import com.almasb.fxgl.entity.Entity;
 import com.almasb.fxgl.entity.level.Level;
 import com.almasb.fxgl.entity.level.text.TextLevelLoader;
@@ -44,14 +46,12 @@ import javafx.scene.input.KeyCode;
 import static com.almasb.fxgl.dsl.FXGL.*;
 import static com.ward_cunningham_38.teacherbomber.TeacherBomberType.*;
 
-/**
- * @author Almas Baimagambetov (AlmasB) (almaslvl@gmail.com)
- */
 public class TeacherBomberApp extends GameApplication {
 
     public static final int TILE_SIZE = 40;
 
     private AStarGrid grid;
+    private int players = 2;
 
     private Entity player1;
     private Entity player2;
@@ -81,70 +81,110 @@ public class TeacherBomberApp extends GameApplication {
         getInput().addAction(new UserAction("Move Up W") {
             @Override
             protected void onActionBegin() {
-                playerComponent1.moveUp();
+                try
+                {
+                    playerComponent1.moveUp();
+                }
+                catch (Exception ignored) {}
             }
         }, KeyCode.W);
 
         getInput().addAction(new UserAction("Move Left A") {
             @Override
             protected void onActionBegin() {
-                playerComponent1.moveLeft();
+                try
+                {
+                    playerComponent1.moveLeft();
+                }
+                catch (Exception ignored) {}
             }
         }, KeyCode.A);
 
         getInput().addAction(new UserAction("Move Down S") {
             @Override
             protected void onActionBegin() {
-                playerComponent1.moveDown();
+                try
+                {
+                    playerComponent1.moveDown();
+                }
+                catch (Exception ignored) {}
             }
         }, KeyCode.S);
 
         getInput().addAction(new UserAction("Move Right D") {
             @Override
             protected void onActionBegin() {
-                playerComponent1.moveRight();
+                try
+                {
+                    playerComponent1.moveRight();
+                }
+                catch (Exception ignored) {}
             }
         }, KeyCode.D);
 
         getInput().addAction(new UserAction("Place Bomb F") {
             @Override
             protected void onActionBegin() {
-                playerComponent1.placeBomb();
+                try
+                {
+                    playerComponent1.placeBomb();
+                }
+                catch (Exception ignored) {}
             }
         }, KeyCode.F);
 
         getInput().addAction(new UserAction("Move Up Arrow") {
             @Override
             protected void onActionBegin() {
-                playerComponent2.moveUp();
+                try
+                {
+                    playerComponent2.moveUp();
+                }
+                catch (Exception ignored) {}
             }
         }, KeyCode.UP);
 
         getInput().addAction(new UserAction("Move Left Arrow") {
             @Override
             protected void onActionBegin() {
-                playerComponent2.moveLeft();
+                try
+                {
+                    playerComponent2.moveLeft();
+                }
+                catch (Exception ignored) {}
             }
         }, KeyCode.LEFT);
 
         getInput().addAction(new UserAction("Move Down Arrow") {
             @Override
             protected void onActionBegin() {
-                playerComponent2.moveDown();
+                try
+                {
+                    playerComponent2.moveDown();
+                }
+                catch (Exception ignored) {}
             }
         }, KeyCode.DOWN);
 
         getInput().addAction(new UserAction("Move Right Arrow") {
             @Override
             protected void onActionBegin() {
-                playerComponent2.moveRight();
+                try
+                {
+                    playerComponent2.moveRight();
+                }
+                catch (Exception ignored) {}
             }
         }, KeyCode.RIGHT);
 
-        getInput().addAction(new UserAction("Place Bomb ") {
+        getInput().addAction(new UserAction("Place Bomb NUM0") {
             @Override
             protected void onActionBegin() {
-                playerComponent2.placeBomb();
+                try
+                {
+                    playerComponent2.placeBomb();
+                }
+                catch (Exception ignored) {}
             }
         }, KeyCode.NUMPAD0);
     }
@@ -160,7 +200,9 @@ public class TeacherBomberApp extends GameApplication {
 
         grid = AStarGrid.fromWorld(getGameWorld(), 15, 15, 40, 40, type -> {
             if (type.equals(WALL) || type.equals(BRICK))
+            {
                 return CellState.NOT_WALKABLE;
+            }
 
             return CellState.WALKABLE;
         });
@@ -179,15 +221,34 @@ public class TeacherBomberApp extends GameApplication {
         });
     }
 
-    public void onBrickDestroyed(Entity brick) {
-        int cellX = (int)((brick.getX() + 20) / TILE_SIZE);
-        int cellY = (int)((brick.getY() + 20) / TILE_SIZE);
+    public void onBombBlowUp(Entity entity)
+    {
+        int cellX = (int)((entity.getX() + 20) / TILE_SIZE);
+        int cellY = (int)((entity.getY() + 20) / TILE_SIZE);
 
         grid.get(cellX, cellY).setState(CellState.WALKABLE);
+        despawnWithScale(entity);
 
-        if (FXGLMath.randomBoolean()) {
+        if (FXGLMath.randomBoolean())
+        {
             spawn("Powerup", cellX * 40, cellY * 40);
         }
+
+        if (entity.isType(PLAYER))
+        {
+            players = players - 1;
+        }
+
+        if (players == 0)
+        {
+            gameOver();
+        }
+    }
+
+    public void gameOver()
+    {
+        // implement highscore system
+        System.out.println("the end");
     }
 
     public static void main(String[] args) {

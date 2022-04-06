@@ -18,9 +18,7 @@ import static com.almasb.fxgl.dsl.FXGL.*;
 import static com.almasb.fxglgames.bomberman.BombermanApp.TILE_SIZE;
 import static com.almasb.fxglgames.bomberman.BombermanType.*;
 
-/**
- * @author Almas Baimagambetov (almaslvl@gmail.com)
- */
+
 public class BombermanFactory implements EntityFactory {
 
     @Spawns("BG")

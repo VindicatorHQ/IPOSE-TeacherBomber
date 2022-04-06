@@ -11,9 +11,7 @@ import javafx.util.Duration;
 import static com.almasb.fxgl.dsl.FXGL.getGameTimer;
 import static com.almasb.fxgl.dsl.FXGL.spawn;
 
-/**
- * @author Almas Baimagambetov (almaslvl@gmail.com)
- */
+
 public class PlayerComponent extends Component {
 
     private CellMoveComponent cell;

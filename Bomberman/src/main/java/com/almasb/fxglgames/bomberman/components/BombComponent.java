@@ -8,9 +8,7 @@ import com.almasb.fxglgames.bomberman.BombermanType;
 
 import static com.almasb.fxgl.dsl.FXGL.*;
 
-/**
- * @author Almas Baimagambetov (almaslvl@gmail.com)
- */
+
 public class BombComponent extends Component {
 
     private int radius;

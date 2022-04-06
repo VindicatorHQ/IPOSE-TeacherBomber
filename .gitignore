@@ -15,3 +15,4 @@ build/
 *.log
 logs/
 system/
+Bomberman/target

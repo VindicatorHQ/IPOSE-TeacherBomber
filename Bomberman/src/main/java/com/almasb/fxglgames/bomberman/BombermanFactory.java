@@ -27,7 +27,7 @@ public class BombermanFactory implements EntityFactory {
     public Entity newBackground(SpawnData data) {
         return entityBuilder()
                 .at(0, 0)
-                .view(new Rectangle(600, 600, Color.LIGHTGREEN))
+                .viewWithBBox(texture("sand.jpg",600,600))
                 .zIndex(-1)
                 .build();
     }
@@ -36,7 +36,7 @@ public class BombermanFactory implements EntityFactory {
     public Entity newWall(SpawnData data) {
         return entityBuilder(data)
                 .type(WALL)
-                .viewWithBBox(new Rectangle(40, 40, Color.GRAY.saturate()))
+                .viewWithBBox(texture("stonewall.jpg",40,40))
                 .build();
     }
 
@@ -53,7 +53,7 @@ public class BombermanFactory implements EntityFactory {
         return entityBuilder(data)
                 .atAnchored(new Point2D(20, 20), new Point2D(20, 20))
                 .type(PLAYER)
-                .viewWithBBox(new Rectangle(TILE_SIZE, TILE_SIZE, Color.BLUE))
+                .viewWithBBox(texture("koen.png", 40, 40))
                 .with(new CollidableComponent(true))
                 .with(new CellMoveComponent(40, 40, 150))
                 .with(new AStarMoveComponent(FXGL.<BombermanApp>getAppCast().getGrid()))

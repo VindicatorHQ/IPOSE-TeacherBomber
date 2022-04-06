@@ -35,7 +35,7 @@ public class PlayerComponent extends Component {
         getGameTimer().runOnceAfter(() -> {
             bomb.getComponent(BombComponent.class).explode();
             bombsPlaced--;
-        }, Duration.seconds(2));
+        }, Duration.seconds(1));
     }
 
     public void moveRight() {

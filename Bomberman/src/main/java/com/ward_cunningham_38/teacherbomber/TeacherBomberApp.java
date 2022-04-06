@@ -26,6 +26,7 @@
 
 package com.ward_cunningham_38.teacherbomber;
 
+import com.ward_cunningham_38.teacherbomber.components.PlayerComponent;
 import com.almasb.fxgl.app.GameApplication;
 import com.almasb.fxgl.app.GameSettings;
 import com.almasb.fxgl.app.scene.FXGLMenu;
@@ -38,15 +39,13 @@ import com.almasb.fxgl.entity.level.text.TextLevelLoader;
 import com.almasb.fxgl.input.UserAction;
 import com.almasb.fxgl.pathfinding.CellState;
 import com.almasb.fxgl.pathfinding.astar.AStarGrid;
-import com.ward_cunningham_38.teacherbomber.components.PlayerComponent;
 import javafx.scene.input.KeyCode;
 
 import static com.almasb.fxgl.dsl.FXGL.*;
-import static com.ward_cunningham_38.teacherbomber.TeacherBomberType.*;
 
 public class TeacherBomberApp extends GameApplication {
 
-    public static final int TILE_SIZE = 40;
+    public static final int TILE_SIZE = 120;
 
     private AStarGrid grid;
 
@@ -120,8 +119,8 @@ public class TeacherBomberApp extends GameApplication {
 
         spawn("BG");
 
-        grid = AStarGrid.fromWorld(getGameWorld(), 45, 45, 120, 120, type -> {
-            if (type.equals(WALL) || type.equals(BRICK))
+        grid = AStarGrid.fromWorld(getGameWorld(), 16, 9, 120, 120, type -> {
+            if (type.equals(TeacherBomberType.WALL) || type.equals(TeacherBomberType.BRICK))
                 return CellState.NOT_WALKABLE;
 
             return CellState.WALKABLE;
@@ -133,19 +132,19 @@ public class TeacherBomberApp extends GameApplication {
 
     @Override
     protected void initPhysics() {
-        onCollisionCollectible(PLAYER, POWERUP, powerup -> {
+        onCollisionCollectible(TeacherBomberType.PLAYER, TeacherBomberType.POWERUP, powerup -> {
             playerComponent.increaseMaxBombs();
         });
     }
 
     public void onBrickDestroyed(Entity brick) {
-        int cellX = (int)((brick.getX() + 20) / TILE_SIZE);
-        int cellY = (int)((brick.getY() + 20) / TILE_SIZE);
+        int cellX = (int)((brick.getX() + 60) / TILE_SIZE);
+        int cellY = (int)((brick.getY() + 60) / TILE_SIZE);
 
         grid.get(cellX, cellY).setState(CellState.WALKABLE);
 
         if (FXGLMath.randomBoolean()) {
-            spawn("Powerup", cellX * 40, cellY * 40);
+            spawn("Powerup", cellX * 120, cellY * 120);
         }
     }
 
@@ -153,3 +152,5 @@ public class TeacherBomberApp extends GameApplication {
         launch(args);
     }
 }
+
+

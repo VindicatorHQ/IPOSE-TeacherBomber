@@ -23,14 +23,18 @@ public class PlayerComponent extends Component {
         maxBombs++;
     }
 
-    public void placeBomb() {
-        if (bombsPlaced == maxBombs) {
+    public void placeBomb()
+    {
+        if (bombsPlaced == maxBombs)
+        {
             return;
         }
 
         bombsPlaced++;
 
-        Entity bomb = spawn("Bomb", new SpawnData(cell.getCellX() * 40, cell.getCellY() * 40).put("radius", TeacherBomberApp.TILE_SIZE / 2));
+        Entity bomb = spawn("Bomb",
+                new SpawnData(cell.getCellX() * TeacherBomberApp.TILE_SIZE, cell.getCellY() * TeacherBomberApp.TILE_SIZE)
+                .put("radius", TeacherBomberApp.TILE_SIZE / 2));
 
         getGameTimer().runOnceAfter(() -> {
             bomb.getComponent(BombComponent.class).explode();

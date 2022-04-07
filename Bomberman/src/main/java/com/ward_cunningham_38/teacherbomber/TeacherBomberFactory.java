@@ -33,7 +33,7 @@ public class TeacherBomberFactory implements EntityFactory {
     public Entity newWall(SpawnData data) {
         return entityBuilder(data)
                 .type(WALL)
-                .viewWithBBox(new Rectangle(40, 40, Color.GRAY.saturate()))
+                .viewWithBBox(new Rectangle(TILE_SIZE, TILE_SIZE, Color.GRAY.saturate()))
                 .build();
     }
 
@@ -41,18 +41,18 @@ public class TeacherBomberFactory implements EntityFactory {
     public Entity newBrick(SpawnData data) {
         return entityBuilder(data)
                 .type(BRICK)
-                .viewWithBBox(texture("brick.png", 40, 40))
+                .viewWithBBox(texture("brick.png", TILE_SIZE, TILE_SIZE))
                 .build();
     }
 
     @Spawns("Player_1")
     public Entity player_1(SpawnData data) {
         return entityBuilder(data)
-                .atAnchored(new Point2D(20, 20), new Point2D(20, 20))
+                .atAnchored(new Point2D(TeacherBomberApp.TILE_AXIS, TeacherBomberApp.TILE_AXIS), new Point2D(TeacherBomberApp.TILE_AXIS, TeacherBomberApp.TILE_AXIS))
                 .type(PLAYER)
                 .viewWithBBox(new Rectangle(TILE_SIZE, TILE_SIZE, Color.BLUE))
                 .with(new CollidableComponent(true))
-                .with(new CellMoveComponent(40, 40, 150))
+                .with(new CellMoveComponent(TILE_SIZE, TILE_SIZE, 150))
                 .with(new AStarMoveComponent(FXGL.<TeacherBomberApp>getAppCast().getGrid()))
                 .with(new PlayerComponent())
                 .build();
@@ -61,11 +61,11 @@ public class TeacherBomberFactory implements EntityFactory {
     @Spawns("Player_2")
     public Entity player_2(SpawnData data) {
         return entityBuilder(data)
-                .atAnchored(new Point2D(20, 20), new Point2D(580, 20))
+                .atAnchored(new Point2D(TeacherBomberApp.TILE_AXIS, TeacherBomberApp.TILE_AXIS), new Point2D(580, TeacherBomberApp.TILE_AXIS))
                 .type(PLAYER)
                 .viewWithBBox(new Rectangle(TILE_SIZE, TILE_SIZE, Color.GREEN))
                 .with(new CollidableComponent(true))
-                .with(new CellMoveComponent(40, 40, 150))
+                .with(new CellMoveComponent(TILE_SIZE, TILE_SIZE, 150))
                 .with(new AStarMoveComponent(FXGL.<TeacherBomberApp>getAppCast().getGrid()))
                 .with(new PlayerComponent())
                 .build();

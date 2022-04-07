@@ -1,16 +1,15 @@
-package com.almasb.fxglgames.bomberman.components;
+package com.ward_cunningham_38.teacherbomber.components;
 
 import com.almasb.fxgl.entity.Entity;
 import com.almasb.fxgl.entity.SpawnData;
 import com.almasb.fxgl.entity.component.Component;
 import com.almasb.fxgl.pathfinding.CellMoveComponent;
 import com.almasb.fxgl.pathfinding.astar.AStarMoveComponent;
-import com.almasb.fxglgames.bomberman.BombermanApp;
+import com.ward_cunningham_38.teacherbomber.TeacherBomberApp;
 import javafx.util.Duration;
 
 import static com.almasb.fxgl.dsl.FXGL.getGameTimer;
 import static com.almasb.fxgl.dsl.FXGL.spawn;
-
 
 public class PlayerComponent extends Component {
 
@@ -24,14 +23,18 @@ public class PlayerComponent extends Component {
         maxBombs++;
     }
 
-    public void placeBomb() {
-        if (bombsPlaced == maxBombs) {
+    public void placeBomb()
+    {
+        if (bombsPlaced == maxBombs)
+        {
             return;
         }
 
         bombsPlaced++;
 
-        Entity bomb = spawn("Bomb", new SpawnData(cell.getCellX() * 40, cell.getCellY() * 40).put("radius", BombermanApp.TILE_SIZE / 2));
+        Entity bomb = spawn("Bomb",
+                new SpawnData(cell.getCellX() * TeacherBomberApp.TILE_SIZE, cell.getCellY() * TeacherBomberApp.TILE_SIZE)
+                .put("radius", TeacherBomberApp.TILE_SIZE / 2));
 
         getGameTimer().runOnceAfter(() -> {
             bomb.getComponent(BombComponent.class).explode();

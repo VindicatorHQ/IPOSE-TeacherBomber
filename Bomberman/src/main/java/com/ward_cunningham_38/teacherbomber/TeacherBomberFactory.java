@@ -1,4 +1,4 @@
-package com.almasb.fxglgames.bomberman;
+package com.ward_cunningham_38.teacherbomber;
 
 import com.almasb.fxgl.dsl.FXGL;
 import com.almasb.fxgl.entity.Entity;
@@ -8,24 +8,23 @@ import com.almasb.fxgl.entity.Spawns;
 import com.almasb.fxgl.entity.components.CollidableComponent;
 import com.almasb.fxgl.pathfinding.CellMoveComponent;
 import com.almasb.fxgl.pathfinding.astar.AStarMoveComponent;
-import com.almasb.fxglgames.bomberman.components.BombComponent;
-import com.almasb.fxglgames.bomberman.components.PlayerComponent;
+import com.ward_cunningham_38.teacherbomber.components.BombComponent;
+import com.ward_cunningham_38.teacherbomber.components.PlayerComponent;
 import javafx.geometry.Point2D;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
 import static com.almasb.fxgl.dsl.FXGL.*;
-import static com.almasb.fxglgames.bomberman.BombermanApp.TILE_SIZE;
-import static com.almasb.fxglgames.bomberman.BombermanType.*;
+import static com.ward_cunningham_38.teacherbomber.TeacherBomberApp.TILE_SIZE;
+import static com.ward_cunningham_38.teacherbomber.TeacherBomberType.*;
 
-
-public class BombermanFactory implements EntityFactory {
+public class TeacherBomberFactory implements EntityFactory {
 
     @Spawns("BG")
     public Entity newBackground(SpawnData data) {
         return entityBuilder()
                 .at(0, 0)
-                .viewWithBBox(texture("sand.jpg",600,600))
+                .view(new Rectangle(600, 600, Color.LIGHTGREEN))
                 .zIndex(-1)
                 .build();
     }
@@ -34,7 +33,7 @@ public class BombermanFactory implements EntityFactory {
     public Entity newWall(SpawnData data) {
         return entityBuilder(data)
                 .type(WALL)
-                .viewWithBBox(texture("stonewall.jpg",40,40))
+                .viewWithBBox(new Rectangle(TILE_SIZE, TILE_SIZE, Color.GRAY.saturate()))
                 .build();
     }
 
@@ -42,19 +41,32 @@ public class BombermanFactory implements EntityFactory {
     public Entity newBrick(SpawnData data) {
         return entityBuilder(data)
                 .type(BRICK)
-                .viewWithBBox(texture("brick.png", 40, 40))
+                .viewWithBBox(texture("brick.png", TILE_SIZE, TILE_SIZE))
                 .build();
     }
 
-    @Spawns("Player")
-    public Entity newPlayer(SpawnData data) {
+    @Spawns("Player_1")
+    public Entity player_1(SpawnData data) {
         return entityBuilder(data)
-                .atAnchored(new Point2D(20, 20), new Point2D(20, 20))
+                .atAnchored(new Point2D(TeacherBomberApp.TILE_AXIS, TeacherBomberApp.TILE_AXIS), new Point2D(TeacherBomberApp.TILE_AXIS, TeacherBomberApp.TILE_AXIS))
                 .type(PLAYER)
-                .viewWithBBox(texture("koen.png", 40, 40))
+                .viewWithBBox(new Rectangle(TILE_SIZE, TILE_SIZE, Color.BLUE))
                 .with(new CollidableComponent(true))
-                .with(new CellMoveComponent(40, 40, 150))
-                .with(new AStarMoveComponent(FXGL.<BombermanApp>getAppCast().getGrid()))
+                .with(new CellMoveComponent(TILE_SIZE, TILE_SIZE, 150))
+                .with(new AStarMoveComponent(FXGL.<TeacherBomberApp>getAppCast().getGrid()))
+                .with(new PlayerComponent())
+                .build();
+    }
+
+    @Spawns("Player_2")
+    public Entity player_2(SpawnData data) {
+        return entityBuilder(data)
+                .atAnchored(new Point2D(TeacherBomberApp.TILE_AXIS, TeacherBomberApp.TILE_AXIS), new Point2D(580, TeacherBomberApp.TILE_AXIS))
+                .type(PLAYER)
+                .viewWithBBox(new Rectangle(TILE_SIZE, TILE_SIZE, Color.GREEN))
+                .with(new CollidableComponent(true))
+                .with(new CellMoveComponent(TILE_SIZE, TILE_SIZE, 150))
+                .with(new AStarMoveComponent(FXGL.<TeacherBomberApp>getAppCast().getGrid()))
                 .with(new PlayerComponent())
                 .build();
     }

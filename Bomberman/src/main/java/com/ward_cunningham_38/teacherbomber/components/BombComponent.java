@@ -8,27 +8,25 @@ import com.ward_cunningham_38.teacherbomber.TeacherBomberType;
 
 import static com.almasb.fxgl.dsl.FXGL.*;
 
-/**
- * @author Almas Baimagambetov (almaslvl@gmail.com)
- */
 public class BombComponent extends Component {
 
-    private int radius;
+    private final int radius;
 
-    public BombComponent(int radius) {
+    public BombComponent(int radius)
+    {
         this.radius = radius;
     }
 
-    public void explode() {
-        BoundingBoxComponent bbox = entity.getBoundingBoxComponent();
+    public void explode()
+    {
+        BoundingBoxComponent boundingBox = entity.getBoundingBoxComponent();
 
         getGameWorld()
-                .getEntitiesInRange(bbox.range(radius, radius))
+                .getEntitiesInRange(boundingBox.range(radius, radius))
                 .stream()
-                .filter(e -> e.isType(TeacherBomberType.BRICK))
+                .filter(e -> e.isType(TeacherBomberType.BRICK) || e.isType(TeacherBomberType.PLAYER))
                 .forEach(e -> {
-                    FXGL.<TeacherBomberApp>getAppCast().onBrickDestroyed(e);
-                    e.removeFromWorld();
+                    FXGL.<TeacherBomberApp>getAppCast().onBombBlowUp(e);
                 });
 
         entity.removeFromWorld();

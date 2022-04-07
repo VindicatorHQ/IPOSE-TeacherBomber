@@ -8,8 +8,7 @@ import com.almasb.fxgl.pathfinding.astar.AStarMoveComponent;
 import com.ward_cunningham_38.teacherbomber.TeacherBomberApp;
 import javafx.util.Duration;
 
-import static com.almasb.fxgl.dsl.FXGL.getGameTimer;
-import static com.almasb.fxgl.dsl.FXGL.spawn;
+import static com.almasb.fxgl.dsl.FXGL.*;
 
 public class PlayerComponent extends Component {
 
@@ -29,28 +28,32 @@ public class PlayerComponent extends Component {
         }
 
         bombsPlaced++;
-
+        play("bombplant.wav");
         Entity bomb = spawn("Bomb", new SpawnData(cell.getCellX() * 120, cell.getCellY() * 120).put("radius", TeacherBomberApp.TILE_SIZE / 2));
 
         getGameTimer().runOnceAfter(() -> {
             bomb.getComponent(BombComponent.class).explode();
             bombsPlaced--;
-        }, Duration.seconds(1));
+        }, Duration.seconds(2));
     }
 
     public void moveRight() {
+        play("krabwalk.wav");
         astar.moveToRightCell();
     }
 
     public void moveLeft() {
+        play("krabwalk.wav");
         astar.moveToLeftCell();
     }
 
     public void moveUp() {
+        play("krabwalk.wav");
         astar.moveToUpCell();
     }
 
     public void moveDown() {
+        play("krabwalk.wav");
         astar.moveToDownCell();
     }
 }

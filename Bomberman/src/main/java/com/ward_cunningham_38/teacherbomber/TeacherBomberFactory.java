@@ -38,7 +38,7 @@ public class TeacherBomberFactory implements EntityFactory {
     public Entity newBrick(SpawnData data) {
         return entityBuilder(data)
                 .type(TeacherBomberType.BRICK)
-                .viewWithBBox(texture("wall.png", 120, 120))
+                .viewWithBBox(texture("thwomp.png", 120, 120))
                 .build();
     }
 
@@ -49,7 +49,7 @@ public class TeacherBomberFactory implements EntityFactory {
                 .type(TeacherBomberType.PLAYER)
                 .viewWithBBox(texture("koen.png", 120, 120))
                 .with(new CollidableComponent(true))
-                .with(new CellMoveComponent(120, 120, 450))
+                .with(new CellMoveComponent(120, 120, 200))
                 .with(new AStarMoveComponent(FXGL.<TeacherBomberApp>getAppCast().getGrid()))
                 .with(new PlayerComponent())
                 .build();

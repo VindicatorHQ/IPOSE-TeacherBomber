@@ -58,7 +58,7 @@ public class TeacherBomberApp extends GameApplication {
 
     @Override
     protected void initSettings(GameSettings settings) {
-        settings.setTitle("Bomberman App");
+        settings.setTitle("Teacher Bomber");
         settings.setVersion("0.1");
         settings.setFullScreenAllowed(true);
         settings.setFullScreenFromStart(true);
@@ -152,5 +152,4 @@ public class TeacherBomberApp extends GameApplication {
         launch(args);
     }
 }
-
 

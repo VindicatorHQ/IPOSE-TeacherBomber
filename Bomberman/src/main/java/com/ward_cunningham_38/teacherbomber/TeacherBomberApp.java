@@ -1,6 +1,5 @@
 package com.ward_cunningham_38.teacherbomber;
 
-import com.ward_cunningham_38.teacherbomber.components.PlayerComponent;
 import com.almasb.fxgl.app.GameApplication;
 import com.almasb.fxgl.app.GameSettings;
 import com.almasb.fxgl.app.scene.FXGLMenu;
@@ -12,13 +11,19 @@ import com.almasb.fxgl.entity.level.text.TextLevelLoader;
 import com.almasb.fxgl.input.UserAction;
 import com.almasb.fxgl.pathfinding.CellState;
 import com.almasb.fxgl.pathfinding.astar.AStarGrid;
+import com.ward_cunningham_38.teacherbomber.components.PlayerComponent;
 import javafx.scene.input.KeyCode;
 import org.jetbrains.annotations.NotNull;
-import java.util.Random;
+
+import javax.swing.*;
+import java.io.*;
+import java.util.*;
+
 import static com.almasb.fxgl.dsl.FXGL.*;
 
 public class TeacherBomberApp extends GameApplication {
 
+    public static long startTime;
     public static final int TILE_SIZE = 120;
     public static final double TILE_AXIS = 60;
 
@@ -37,11 +42,9 @@ public class TeacherBomberApp extends GameApplication {
     @Override
     protected void initSettings(GameSettings settings) {
         settings.setTitle("Teacher Bomber");
-        settings.setVersion("0.1");
-        settings.setFullScreenAllowed(true);
-        settings.setFullScreenFromStart(true);
-        settings.setWidth(1920);
-        settings.setHeight(1080);
+        settings.setVersion("1");
+        settings.setWidth(1800);
+        settings.setHeight(950);
         settings.setSceneFactory(new SceneFactory() {
             @NotNull
             @Override
@@ -166,6 +169,8 @@ public class TeacherBomberApp extends GameApplication {
 
     @Override
     protected void initGame() {
+        startTime = System.currentTimeMillis();
+
         getGameWorld().addEntityFactory(new TeacherBomberFactory());
 
         String[] arr={"1", "2", "3", "4", "5"};
@@ -219,7 +224,7 @@ public class TeacherBomberApp extends GameApplication {
             players = players - 1;
         }
 
-        if (players == 0)
+        if (players == 1)
         {
             gameOver();
         }
@@ -233,10 +238,44 @@ public class TeacherBomberApp extends GameApplication {
         });
     }
 
-    public void gameOver()
-    {
-        // implement highscore system
-        System.out.println("the end");
+    public void gameOver(){
+        long estimatedTime = System.currentTimeMillis() - startTime;
+
+        System.out.print(estimatedTime);
+
+        BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(System.out));
+
+        // implement highscore systems
+        final JFrame parent = new JFrame();
+        JButton button = new JButton();
+        String name = JOptionPane.showInputDialog(parent, "What is your name?", null);
+
+        try {
+            PrintWriter myWriter = new PrintWriter(new FileWriter("highscores.txt", true));
+            myWriter.append(name + ": " + estimatedTime / 1000 + " seconds" + "\r\n");
+            myWriter.close();
+            System.out.println("Successfully wrote to the file.");
+        } catch (IOException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
+
+        try {
+            File myObj = new File("highscores.txt");
+            Scanner myReader = new Scanner(myObj);
+            List<String> list = new ArrayList<String>();
+            while (myReader.hasNextLine()) {
+                String data = myReader.nextLine();
+                System.out.println(data);
+                list.add(data +  "\r\n");
+            }
+            JOptionPane.showMessageDialog(parent, list, "highscores" ,JOptionPane.PLAIN_MESSAGE);
+            myReader.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
+
     }
 
     public static void main(String[] args) {

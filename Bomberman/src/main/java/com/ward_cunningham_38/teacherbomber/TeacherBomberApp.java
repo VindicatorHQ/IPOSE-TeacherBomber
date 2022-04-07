@@ -203,8 +203,8 @@ public class TeacherBomberApp extends GameApplication {
 
     public void onBombBlowUp(Entity entity)
     {
-        int cellX = (int)((entity.getX() + TeacherBomberApp.TILE_AXIS) / TILE_SIZE);
-        int cellY = (int)((entity.getY() + TeacherBomberApp.TILE_AXIS) / TILE_SIZE);
+        int cellX = (int)((entity.getX() + TILE_AXIS) / TILE_SIZE);
+        int cellY = (int)((entity.getY() + TILE_AXIS) / TILE_SIZE);
 
         grid.get(cellX, cellY).setState(CellState.WALKABLE);
         despawnWithScale(entity);

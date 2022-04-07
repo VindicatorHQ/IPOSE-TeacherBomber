@@ -4,7 +4,9 @@ import com.almasb.fxgl.app.GameApplication;
 import com.almasb.fxgl.app.GameSettings;
 import com.almasb.fxgl.app.scene.FXGLMenu;
 import com.almasb.fxgl.app.scene.SceneFactory;
+import com.almasb.fxgl.core.collection.PropertyMap;
 import com.almasb.fxgl.core.math.FXGLMath;
+import com.almasb.fxgl.dsl.FXGL;
 import com.almasb.fxgl.entity.Entity;
 import com.almasb.fxgl.entity.level.Level;
 import com.almasb.fxgl.entity.level.text.TextLevelLoader;
@@ -12,6 +14,7 @@ import com.almasb.fxgl.input.UserAction;
 import com.almasb.fxgl.pathfinding.CellState;
 import com.almasb.fxgl.pathfinding.astar.AStarGrid;
 import com.ward_cunningham_38.teacherbomber.components.PlayerComponent;
+import javafx.beans.property.IntegerProperty;
 import javafx.scene.input.KeyCode;
 import com.almasb.fxgl.animation.Interpolators;
 import com.almasb.fxgl.app.scene.MenuType;
@@ -26,14 +29,25 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+
+
+import javax.swing.*;
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
+import java.text.SimpleDateFormat;
+import java.util.*;
+import java.util.concurrent.TimeUnit;
+
 import static com.almasb.fxgl.dsl.FXGL.*;
+import static javafx.beans.binding.Bindings.isEmpty;
 import static javafx.beans.binding.Bindings.when;
 import static com.ward_cunningham_38.teacherbomber.TeacherBomberType.*;
 
 public class TeacherBomberApp extends GameApplication {
+
+    public static long startTime;
 
     public static final int TILE_SIZE = 40;
 
@@ -275,8 +289,22 @@ public class TeacherBomberApp extends GameApplication {
         }, KeyCode.NUMPAD0);
     }
 
+//    @Override
+//    protected void initGameVars(Map<String, Object> vars) {
+//        var time = System.nanoTime();
+//        vars.put("time", time);
+//    }
+
     @Override
     protected void initGame() {
+         this.startTime = System.currentTimeMillis();
+//        this.start = System.currentTimeMillis();
+
+
+
+//        PropertyMap state = FXGL.getWorldProperties();
+//        IntegerProperty t = state.intProperty("lives");
+//        state.setValue("lives", 5);
         getGameWorld().addEntityFactory(new TeacherBomberFactory());
 
         String[] arr={"1", "2", "3", "4", "5"};
@@ -285,6 +313,7 @@ public class TeacherBomberApp extends GameApplication {
 
         Level level = getAssetLoader().loadLevel(arr[randomNumber]+".txt", new TextLevelLoader(40, 40, '0'));
         getGameWorld().setLevel(level);
+
 
         spawn("BG");
 
@@ -303,6 +332,8 @@ public class TeacherBomberApp extends GameApplication {
         player2 = spawn("Player_2");
         playerComponent2 = player2.getComponent(PlayerComponent.class);
     }
+
+
 
     @Override
     protected void initPhysics() {
@@ -329,16 +360,52 @@ public class TeacherBomberApp extends GameApplication {
             players = players - 1;
         }
 
-        if (players == 0)
+        if (players == 1)
         {
             gameOver();
         }
     }
 
-    public void gameOver()
-    {
-        // implement highscore system
+    public void gameOver(){
+
+        long estimatedTime = System.currentTimeMillis() - startTime;
+
+        System.out.print(estimatedTime);
+
+        BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(System.out));
+
+        // implement highscore systems
+        final JFrame parent = new JFrame();
+        JButton button = new JButton();
+        String name = JOptionPane.showInputDialog(parent, "What is your name?", null);
+
+        try {
+            PrintWriter myWriter = new PrintWriter(new FileWriter("highscores.txt", true));
+            myWriter.append(name + ": " + estimatedTime / 1000 + " seconds" + "\r\n");
+            myWriter.close();
+            System.out.println("Successfully wrote to the file.");
+        } catch (IOException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
         System.out.println("the end");
+
+        try {
+            File myObj = new File("highscores.txt");
+            Scanner myReader = new Scanner(myObj);
+            List<String> list = new ArrayList<String>();
+            while (myReader.hasNextLine()) {
+                String data = myReader.nextLine();
+                System.out.println(data);
+                list.add(data +  "\r\n");
+            }
+            JOptionPane.showMessageDialog(parent, list, "highscores" ,JOptionPane.PLAIN_MESSAGE);
+            myReader.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
+
     }
 
     public static void main(String[] args) {

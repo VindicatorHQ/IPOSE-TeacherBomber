@@ -31,9 +31,7 @@ public class MyGameMenu extends FXGLMenu {
     {
         super(MenuType.MAIN_MENU);
 
-        var bg = texture("background.png", getAppWidth() + 450, getAppHeight() + 200);
-        bg.setTranslateY(-85);
-        bg.setTranslateX(-450);
+        var bg = texture("TeacherBomberBackground.png", getAppWidth(), getAppHeight());
 
         var titleView = getUIFactoryService().newText(getSettings().getTitle(), 48);
         centerTextBind(titleView, getAppWidth() / 2.0, 100);
@@ -52,7 +50,6 @@ public class MyGameMenu extends FXGLMenu {
 
         buttons.forEach(btn -> {
             btn.setOpacity(0);
-
             animationBuilder(this)
                     .delay(Duration.seconds(animIndex * 0.1))
                     .interpolator(Interpolators.BACK.EASE_OUT())
@@ -81,8 +78,8 @@ public class MyGameMenu extends FXGLMenu {
         for (Node n : group.getChildren()) {
             Point2D vector = new Point2D(0, 0);
             n.setLayoutX(vector.getX());
-            n.setLayoutY(vector.getY()  + i);
-            i += 80;
+            n.setLayoutY(vector.getY() + i);
+            i += 250;
         }
 
         return group;
@@ -113,7 +110,6 @@ public class MyGameMenu extends FXGLMenu {
         Rectangle clip = new Rectangle(200, 50);
         clip.translateXProperty().bind(btn.translateXProperty().negate());
 
-        btn.setTranslateX(-200);
         btn.setClip(clip);
         btn.setCache(true);
         btn.setCacheHint(CacheHint.SPEED);

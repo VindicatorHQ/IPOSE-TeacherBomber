@@ -45,6 +45,7 @@ public class TeacherBomberApp extends GameApplication {
         settings.setVersion("1");
         settings.setWidth(1800);
         settings.setHeight(950);
+        settings.setMainMenuEnabled(true);
         settings.setSceneFactory(new SceneFactory() {
             @NotNull
             @Override

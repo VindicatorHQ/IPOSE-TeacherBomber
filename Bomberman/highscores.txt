@@ -12,3 +12,4 @@ jkebhke: 5 seconds
 jemeoder: 15 seconds
 je moeder: 23 seconds
 sssss: 31 seconds
+koen: 5 seconds

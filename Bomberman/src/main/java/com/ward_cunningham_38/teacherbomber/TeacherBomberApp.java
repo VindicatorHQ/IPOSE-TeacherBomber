@@ -277,6 +277,7 @@ public class TeacherBomberApp extends GameApplication {
             e.printStackTrace();
         }
 
+        System.exit(0);
     }
 
     public static void main(String[] args) {

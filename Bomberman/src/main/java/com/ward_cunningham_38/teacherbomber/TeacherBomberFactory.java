@@ -22,7 +22,7 @@ public class TeacherBomberFactory implements EntityFactory {
     public Entity newBackground(SpawnData data) {
         return entityBuilder()
                 .at(0, 0)
-                .viewWithBBox(texture("Floor.png", 1920, 1080))
+                .viewWithBBox(texture("Floor.png", 1800, 950))
                 .zIndex(-1)
                 .build();
     }
@@ -59,7 +59,7 @@ public class TeacherBomberFactory implements EntityFactory {
     @Spawns("Player_2")
     public Entity player_2(SpawnData data) {
         return entityBuilder(data)
-                .atAnchored(new Point2D(TILE_AXIS, TILE_AXIS), new Point2D(1750, TILE_AXIS))
+                .atAnchored(new Point2D(TILE_AXIS, TILE_AXIS), new Point2D(1800, TILE_AXIS))
                 .type(TeacherBomberType.PLAYER)
                 .viewWithBBox(texture("koen.png", TILE_SIZE, TILE_SIZE))
                 .with(new CollidableComponent(true))

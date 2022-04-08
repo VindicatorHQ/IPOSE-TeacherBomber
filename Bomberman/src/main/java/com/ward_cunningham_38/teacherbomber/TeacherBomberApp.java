@@ -5,6 +5,7 @@ import com.almasb.fxgl.app.GameSettings;
 import com.almasb.fxgl.app.scene.FXGLMenu;
 import com.almasb.fxgl.app.scene.SceneFactory;
 import com.almasb.fxgl.core.math.FXGLMath;
+import com.almasb.fxgl.dsl.FXGL;
 import com.almasb.fxgl.entity.Entity;
 import com.almasb.fxgl.entity.level.Level;
 import com.almasb.fxgl.entity.level.text.TextLevelLoader;
@@ -18,6 +19,7 @@ import org.jetbrains.annotations.NotNull;
 import javax.swing.*;
 import java.io.*;
 import java.util.*;
+import java.util.List;
 
 import static com.almasb.fxgl.dsl.FXGL.*;
 
@@ -42,7 +44,7 @@ public class TeacherBomberApp extends GameApplication {
     @Override
     protected void initSettings(GameSettings settings) {
         settings.setTitle("Teacher Bomber");
-        settings.setVersion("1");
+        settings.setVersion(" ");
         settings.setWidth(1800);
         settings.setHeight(950);
         settings.setMainMenuEnabled(true);
@@ -276,6 +278,9 @@ public class TeacherBomberApp extends GameApplication {
             System.out.println("An error occurred.");
             e.printStackTrace();
         }
+        FXGL.getDialogService().showMessageBox("Game Over", () -> FXGL.getGameController().gotoMainMenu());
+
+
 
     }
 

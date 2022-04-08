@@ -244,8 +244,6 @@ public class TeacherBomberApp extends GameApplication {
     public void gameOver(){
         long estimatedTime = System.currentTimeMillis() - startTime;
 
-        System.out.print(estimatedTime);
-
         BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(System.out));
 
         // implement highscore systems
@@ -257,7 +255,6 @@ public class TeacherBomberApp extends GameApplication {
             PrintWriter myWriter = new PrintWriter(new FileWriter("highscores.txt", true));
             myWriter.append(name + ": " + estimatedTime / 1000 + " seconds" + "\r\n");
             myWriter.close();
-            System.out.println("Successfully wrote to the file.");
         } catch (IOException e) {
             System.out.println("An error occurred.");
             e.printStackTrace();
@@ -269,7 +266,6 @@ public class TeacherBomberApp extends GameApplication {
             List<String> list = new ArrayList<String>();
             while (myReader.hasNextLine()) {
                 String data = myReader.nextLine();
-                System.out.println(data);
                 list.add(data +  "\r\n");
             }
             JOptionPane.showMessageDialog(parent, list, "highscores" ,JOptionPane.PLAIN_MESSAGE);
@@ -278,10 +274,10 @@ public class TeacherBomberApp extends GameApplication {
             System.out.println("An error occurred.");
             e.printStackTrace();
         }
+
         FXGL.getDialogService().showMessageBox("Game Over", () -> FXGL.getGameController().gotoMainMenu());
 
-
-
+        players = 2;
     }
 
     public static void main(String[] args) {

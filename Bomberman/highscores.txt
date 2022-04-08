@@ -1,15 +1,9 @@
-raven: 4 seconds
-rave1: 3 seconds
-raven: 3 seconds
-raven: 3 seconds
-brrrrt: 3 seconds
-raven: 17 seconds
-test: 3 seconds
-null: 10 seconds
-null: 5 seconds
-null: 7 seconds
-jkebhke: 5 seconds
-jemeoder: 15 seconds
-je moeder: 23 seconds
-sssss: 31 seconds
-koen: 5 seconds
+uwu: 4 seconds
+vincent: 15 seconds
+jef: 9 seconds
+aaaaaa: 25 seconds
+je moeder: 5 seconds
+jeder: 2 seconds
+sd: 4 seconds
+d: 9 seconds
+null: 9 seconds
